@@ -101,6 +101,26 @@
                                                 {% navigation_check_if_cache_label source_column=source_column as is_label %}
                                                 {% if is_label %}
                                                     <label for="checkbox_{{object.pk}}">{{ column_value }}</label>
+
+                                                    <!-- Hardcoded dropdown menu for prototyping -->
+                                                    <!-- TODO: DELETE ME AT PRODUCTION! -->
+                                                    <form>  
+                                                    <select>  
+                                                    <option value = "No reviewer"> No reviewer   
+                                                    </option>  
+                                                    <option value = "Victor"> Victor  
+                                                    </option>  
+                                                    <option value = "Amy"> Amy  
+                                                    </option>  
+                                                    <option value = "Abby"> Abby  
+                                                    </option>  
+                                                    <option value = "Kenny"> Kenny 
+                                                    </option>  
+                                                    <option value = "Fu"> Fu
+                                                    </option>  
+                                                    </select>  
+                                                    </form>  
+
                                                 {% else %}
                                                     {{ column_value }}
                                                 {% endif %}
