@@ -86,3 +86,10 @@ def navigation_source_column_resolve(context, column):
         return result
     else:
         return ''
+
+@register.simple_tag(takes_context=True)
+def navigation_check_if_cache_label(context, source_column):
+    if source_column:
+        return source_column.label == "Label"
+    else:
+        return False
