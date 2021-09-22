@@ -103,6 +103,11 @@ class Document(
             'deferred upload via the API.'
         ), verbose_name=_('Is stub?')
     )
+    reviewer = models.CharField(
+        blank=True, default='None', help_text=_(
+            'The reviewer assigned to this document'
+        ), max_length=255, verbose_name=_('Reviewer')
+    )
 
     objects = DocumentManager()
     trash = TrashCanManager()
