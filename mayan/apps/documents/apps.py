@@ -557,7 +557,7 @@ class DocumentsApp(MayanAppConfig):
             label=_('Pages'), include_label=True, order=-8, source=Document
         )
         SourceColumn(
-            attribute='get_reviewer', is_sortable=True, label=_('Reviewer'),
+            attribute='reviewer', is_sortable=True, label=_('Reviewer'),
             source=Document
         )
 
