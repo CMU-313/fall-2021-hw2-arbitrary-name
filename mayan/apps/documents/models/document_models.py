@@ -299,6 +299,11 @@ class Document(
 
     get_label.short_description = _('Label')
 
+    def get_reviewer(self):
+        return self.reviewer or ugettext('No Reviewer')
+
+    get_reviewer.short_description = _('Reviewer')
+
     @property
     def is_in_trash(self):
         return self.in_trash

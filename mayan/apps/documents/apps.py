@@ -374,6 +374,7 @@ class DocumentsApp(MayanAppConfig):
         ModelField(model=Document, name='label')
         ModelField(model=Document, name='language')
         ModelField(model=Document, name='uuid')
+        ModelField(model=Document, name='reviewer')
 
         ModelFieldRelated(model=Document, name='document_type__label')
         ModelFieldRelated(
@@ -554,6 +555,10 @@ class DocumentsApp(MayanAppConfig):
         SourceColumn(
             func=lambda context: context['object'].pages.count(),
             label=_('Pages'), include_label=True, order=-8, source=Document
+        )
+        SourceColumn(
+            attribute='get_reviewer', is_sortable=True, label=_('Reviewer'),
+            source=Document
         )
 
         # RecentlyCreatedDocument
