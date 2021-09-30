@@ -369,6 +369,7 @@ class DocumentsApp(MayanAppConfig):
         ModelField(
             model=Document, name='document_type'
         )
+        ModelField(model=Document, name='reviewer')
         ModelField(model=Document, name='in_trash')
         ModelField(model=Document, name='is_stub')
         ModelField(model=Document, name='label')
@@ -555,7 +556,10 @@ class DocumentsApp(MayanAppConfig):
             func=lambda context: context['object'].pages.count(),
             label=_('Pages'), include_label=True, order=-8, source=Document
         )
-
+        SourceColumn(
+            attribute='reviewer',
+            label=_('Reviewer'), include_label=True, order=-7, source=Document
+        )
         # RecentlyCreatedDocument
 
         SourceColumn(

@@ -46,7 +46,7 @@ class DocumentSerializer(
             },
         }
         fields = (
-            'datetime_created', 'description', 'document_change_type_url',
+            'datetime_created', 'reviewer', 'description', 'document_change_type_url',
             'document_type', 'document_type_id', 'file_list_url', 'id', 'label',
             'language', 'file_latest', 'url', 'uuid', 'version_active',
             'version_list_url'

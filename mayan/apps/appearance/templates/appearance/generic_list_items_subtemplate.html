@@ -97,16 +97,32 @@
                                         {% navigation_get_source_columns source=object only_identifier=True as source_column %}
                                         {% if source_column %}
                                             {% navigation_source_column_resolve column=source_column as column_value %}
+                                            {% navigation_check_if_cache_label source_column=source_column as is_label %}
                                             <td>
-                                                {% navigation_check_if_cache_label source_column=source_column as is_label %}
                                                 {% if is_label %}
                                                     <label for="checkbox_{{object.pk}}">{{ column_value }}</label>
+                                                {% else %}
+                                                    {{ column_value }}
+                                                {% endif %}
+                                            </td>
+                                        {% endif %}
+                                    {% endif %}
+
+                                    {% if not hide_columns %}
+                                        {% navigation_get_source_columns source=object exclude_identifier=True as source_columns %}
+                                        {% for column in source_columns %}
+                                            <td>
+                                                {% navigation_check_if_reviewer source_column=column as is_reviewer %}
+                                                {% if is_reviewer %}
+                                                    <label for="reviewer-dropdown"> Current:
+                                                        {% navigation_source_column_resolve column=column as column_value %}{{ column_value }}
+                                                    </label>
 
                                                     <!-- Hardcoded dropdown menu for prototyping -->
                                                     <!-- TODO: DELETE ME AT PRODUCTION! -->
-                                                    <form>  
+                                                    <form id="reviewer-dropdown" class="dropdown">  
                                                     <select>  
-                                                    <option value = "No reviewer"> No reviewer   
+                                                    <option value = "None Assigned"> None Assigned   
                                                     </option>  
                                                     <option value = "Victor"> Victor  
                                                     </option>  
@@ -120,28 +136,20 @@
                                                     </option>  
                                                     </select>  
                                                     </form>  
-
                                                 {% else %}
-                                                    {{ column_value }}
+                                                    <div class="{{ table_cell_container_classes }} {{ column.html_extra_classes }}">
+                                                        {% navigation_source_column_resolve column=column as column_value %}{{ column_value }}
+                                                        {# Use explicit 'as column_value ' to force date rendering #}
+                                                    </div>
                                                 {% endif %}
-                                            </td>
-                                        {% endif %}
-                                    {% endif %}
-
-                                    {% if not hide_columns %}
-                                        {% navigation_get_source_columns source=object exclude_identifier=True as source_columns %}
-                                        {% for column in source_columns %}
-                                            <td>
-                                                <div class="{{ table_cell_container_classes }} {{ column.html_extra_classes }}">
-                                                    {% navigation_source_column_resolve column=column as column_value %}{{ column_value }}
-                                                    {# Use explicit 'as column_value ' to force date rendering #}
-                                                </div>
                                             </td>
                                         {% endfor %}
                                     {% endif %}
 
                                     {% for column in extra_columns %}
-                                        <td>{{ object|common_object_property:column.attribute }}</td>
+                                        <td>
+                                            <p>EXTRA_COLUMN</p>
+                                            {{ object|common_object_property:column.attribute }}</td>
                                     {% endfor %}
 
                                     {% if not hide_links %}

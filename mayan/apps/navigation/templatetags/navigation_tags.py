@@ -93,3 +93,10 @@ def navigation_check_if_cache_label(context, source_column):
         return source_column.label == "Label"
     else:
         return False
+
+@register.simple_tag(takes_context=True)
+def navigation_check_if_reviewer(context, source_column):
+    if source_column:
+        return source_column.label == "Reviewer"
+    else:
+        return False
