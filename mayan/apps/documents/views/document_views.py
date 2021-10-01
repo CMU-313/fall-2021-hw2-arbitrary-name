@@ -70,7 +70,7 @@ class DocumentListView(SingleObjectListView):
     
 
 
-class DocumentReviwerChangeView(MultipleObjectFormActionView):
+class DocumentReviewerChangeView(MultipleObjectFormActionView):
     form_class = DocumentReviewerFilteredSelectForm
     object_permission = permission_document_properties_edit
     pk_url_kwarg = 'document_id'

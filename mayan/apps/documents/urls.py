@@ -73,7 +73,7 @@ from .views.document_version_views import (
 )
 from .views.document_views import (
     DocumentTypeChangeView, DocumentListView, DocumentPreviewView,
-    DocumentPropertiesEditView, DocumentPropertiesView
+    DocumentPropertiesEditView, DocumentPropertiesView, DocumentReviewerChangeView
 )
 from .views.favorite_document_views import (
     FavoriteAddView, FavoriteDocumentListView, FavoriteRemoveView
@@ -437,6 +437,11 @@ urlpatterns_documents = [
         regex=r'^documents/(?P<document_id>\d+)/type/$',
         name='document_type_change',
         view=DocumentTypeChangeView.as_view()
+    ),
+    url(
+        regex=r'^documents/(?P<document_id>\d+)/type/$',
+        name='document_reviewer_change',
+        view=DocumentReviewerChangeView.as_view()
     ),
     url(
         regex=r'^documents/multiple/type/$',
