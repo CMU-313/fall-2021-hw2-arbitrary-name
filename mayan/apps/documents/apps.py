@@ -362,7 +362,7 @@ class DocumentsApp(MayanAppConfig):
                 event_document_version_page_edited
             )
         )
-
+        ModelField(model=Document, name='reviewer')
         ModelField(model=Document, name='description')
         ModelField(model=Document, name='datetime_created')
         ModelField(model=Document, name='trashed_date_time')
