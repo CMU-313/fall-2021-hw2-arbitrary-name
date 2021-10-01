@@ -74,6 +74,11 @@ class Document(
             'An optional short text describing a document.'
         ), verbose_name=_('Description')
     )
+    reviewer = models.TextField(
+        blank=True, default='None Assigned', help_text=_(
+            'Assigned reviewer for resume'
+        ), verbose_name=_('Reviewer')
+    )
     datetime_created = models.DateTimeField(
         auto_now_add=True, db_index=True, help_text=_(
             'The server date and time when the document was finally '
