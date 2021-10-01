@@ -27,6 +27,14 @@
 [support]: https://img.shields.io/badge/Get_support-brightgreen
 [support-url]: https://www.mayan-edms.com/support/
 
+<h2 align="center">Using and Testing</h2>
+
+See the [Using and Testing](https://github.com/CMU-313/fall-2021-hw2-arbitrary-name/wiki/Using-and-Testing) section on the wiki for how to use and test the Daskboard we implemented to assign and manage reviewers.
+
+See the [Manual Tests](https://github.com/CMU-313/fall-2021-hw2-arbitrary-name/wiki/Manual-Testing) section of the Wiki for the manual tests we wrote to test our feature. 
+
+***
+
 <div align="center">
   <a href="http://www.mayan-edms.com">
     <img width="200" heigth="200" src="https://gitlab.com/mayan-edms/mayan-edms/raw/master/docs/_static/mayan_logo.png">
