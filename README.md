@@ -48,7 +48,7 @@
 </div>
 
 <h2 align="center">Using and Testing</h2>
-See the [Using and Testing](https://github.com/CMU-313/fall-2021-hw2-arbitrary-name/wiki/Using-and-Testing) section on the wiki for how to use and test the Daskboard we implementd to assign and manage reviewers. 
+See the [Using and Testing](https://github.com/CMU-313/fall-2021-hw2-arbitrary-name/wiki/Using-and-Testing) section on the wiki for how to use and test the Daskboard we implemented to assign and manage reviewers. \
 
 See the [Manual Tests](https://github.com/CMU-313/fall-2021-hw2-arbitrary-name/wiki/Manual-Testing) section of the Wiki for the manual tests we wrote to test our feature. 
 
