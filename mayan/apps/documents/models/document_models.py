@@ -109,8 +109,14 @@ class Document(
         ), verbose_name=_('Is stub?')
     )
 
+    reviewer_choices = [('AMY', 'Amy'), 
+                       ('VICTOR', 'Victor'), 
+                       ('ABBY', 'Abby'),
+                       ('KENNY', 'Kenny'),
+                       ('FU', 'Fu'),]
+
     reviewer = models.TextField(
-        blank=True, default='None Assigned', help_text=_(
+        blank=True, default='AMY', help_text=_(
             'Assigned reviewer for resume'
         ), verbose_name=_('Reviewer')
     )
