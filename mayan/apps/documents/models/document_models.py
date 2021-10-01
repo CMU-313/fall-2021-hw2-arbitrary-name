@@ -104,6 +104,12 @@ class Document(
         ), verbose_name=_('Is stub?')
     )
 
+    reviewer = models.TextField(
+        blank=True, default='None Assigned', help_text=_(
+            'Assigned reviewer for resume'
+        ), verbose_name=_('Reviewer')
+    )
+
     objects = DocumentManager()
     trash = TrashCanManager()
     valid = ValidDocumentManager()

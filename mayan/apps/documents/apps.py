@@ -362,7 +362,7 @@ class DocumentsApp(MayanAppConfig):
                 event_document_version_page_edited
             )
         )
-
+        ModelField(model=Document, name='reviewer')
         ModelField(model=Document, name='description')
         ModelField(model=Document, name='datetime_created')
         ModelField(model=Document, name='trashed_date_time')
@@ -554,6 +554,10 @@ class DocumentsApp(MayanAppConfig):
         SourceColumn(
             func=lambda context: context['object'].pages.count(),
             label=_('Pages'), include_label=True, order=-8, source=Document
+        )
+        SourceColumn(
+            attribute='reviewer',
+            label=_('Reviewer'), include_label=True, order=-7, source=Document
         )
 
         # RecentlyCreatedDocument
