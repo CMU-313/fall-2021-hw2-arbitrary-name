@@ -17,6 +17,11 @@ link_document_type_change = Link(
     permissions=(permission_document_properties_edit,), text=_('Change type'),
     view='documents:document_type_change'
 )
+link_reviewer_change = Link(
+    args='resolved_object.id', icon=icon_document_type_change,
+    permissions=(permission_document_properties_edit,), text=_('Change reviewer'),
+    view='documents:document_reviewer_change'
+)
 link_document_list = Link(
     icon=icon_document_list,
     text=_('All documents'), view='documents:document_list'

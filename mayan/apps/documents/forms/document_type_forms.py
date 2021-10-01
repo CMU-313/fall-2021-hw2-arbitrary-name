@@ -48,3 +48,11 @@ class DocumentTypeFilteredSelectForm(FilteredSelectionForm):
         queryset = DocumentType.objects.all()
         required = True
         widget_attributes = {'class': 'select2', 'size': 10}
+
+class DocumentReviewerFilteredSelectForm(FilteredSelectionForm):
+    class Meta:
+        field_name = 'reviewer'
+        label = _('Reviewer')
+        queryset = DocumentType.objects.all()
+        required = True
+        widget_attributes = {'class': 'select2', 'size': 10}

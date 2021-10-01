@@ -18,7 +18,7 @@ from mayan.apps.events.decorators import method_event
 from ..events import (
     event_document_created, event_document_edited,
     event_document_trashed, event_document_type_changed,
-    event_trashed_document_deleted
+    event_trashed_document_deleted, event_reviewer_changed
 )
 from ..literals import (
     DEFAULT_LANGUAGE, DOCUMENT_FILE_ACTION_PAGES_APPEND,
@@ -29,7 +29,7 @@ from ..managers import (
     DocumentManager, RecentlyCreatedDocumentManager, TrashCanManager,
     ValidDocumentManager
 )
-from ..signals import signal_post_document_type_change
+from ..signals import signal_post_document_type_change, signal_post_reviewer_change
 
 from .document_type_models import DocumentType
 from .mixins import HooksModelMixin
@@ -194,6 +194,24 @@ class Document(
 
                 event_document_type_changed.commit(
                     action_object=document_type, actor=_user, target=self
+                )
+                if _user:
+                    self.add_as_recent_document_for_user(user=_user)
+
+    def reviewer_change(self, reviewer, force=False, _user=None):
+        has_changed = self.reviewer != reviewer
+
+        if has_changed or force:
+            self.reviewer = reviewer
+            with transaction.atomic():
+                self._event_ignore = True
+                self.save()
+                signal_post_reviewer_change.send(
+                    sender=self.__class__, instance=self
+                )
+
+                event_reviewer_changed.commit(
+                    action_object=reviewer, actor=_user, target=self
                 )
                 if _user:
                     self.add_as_recent_document_for_user(user=_user)

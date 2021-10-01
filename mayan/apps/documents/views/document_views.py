@@ -12,7 +12,7 @@ from mayan.apps.views.generics import (
 
 from ..events import event_document_viewed
 from ..forms.document_forms import DocumentForm, DocumentPropertiesForm
-from ..forms.document_type_forms import DocumentTypeFilteredSelectForm
+from ..forms.document_type_forms import DocumentTypeFilteredSelectForm, DocumentReviewerFilteredSelectForm
 from ..icons import icon_document_list
 from ..models.document_models import Document
 from ..permissions import (
@@ -66,7 +66,64 @@ class DocumentListView(SingleObjectListView):
     def get_source_queryset(self):
         queryset = ModelQueryFields.get(model=Document).get_queryset()
         return self.get_document_queryset().filter(pk__in=queryset)
+    
+    
 
+
+class DocumentReviwerChangeView(MultipleObjectFormActionView):
+    form_class = DocumentReviewerFilteredSelectForm
+    object_permission = permission_document_properties_edit
+    pk_url_kwarg = 'document_id'
+    source_queryset = Document.valid
+    success_message = _(
+        'Document reviewer change request performed on %(count)d document'
+    )
+    success_message_plural = _(
+        'Document reviewer change request performed on %(count)d documents'
+    )
+
+    def get_extra_context(self):
+        queryset = self.object_list
+
+        result = {
+            'submit_label': _('Change'),
+            'title': ungettext(
+                singular='Change the reviewer of the selected document',
+                plural='Change the reviewer of the selected documents',
+                number=queryset.count()
+            )
+        }
+
+        if queryset.count() == 1:
+            result.update(
+                {
+                    'object': queryset.first(),
+                    'title': _(
+                        'Change the reviewer of the document: %s'
+                    ) % queryset.first()
+                }
+            )
+
+        return result
+
+    def get_form_extra_kwargs(self):
+        result = {
+            'user': self.request.user
+        }
+
+        return result
+
+    def object_action(self, form, instance):
+        instance.reviewer_change(
+            reviewer=form.cleaned_data['reviewer'],
+            _user=self.request.user
+        )
+
+        messages.success(
+            message=_(
+                'Document reviewer for "%s" changed successfully.'
+            ) % instance, request=self.request
+        )
 
 class DocumentTypeChangeView(MultipleObjectFormActionView):
     form_class = DocumentTypeFilteredSelectForm

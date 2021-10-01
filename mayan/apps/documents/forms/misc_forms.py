@@ -1,5 +1,7 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
+from mayan.apps.views.forms import FilteredSelectionForm
+
 
 from ..literals import PAGE_RANGE_ALL, PAGE_RANGE_CHOICES
 

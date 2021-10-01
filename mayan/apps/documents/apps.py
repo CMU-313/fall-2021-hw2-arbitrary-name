@@ -44,7 +44,7 @@ from .dashboard_widgets import (
 
 from .events import (
     event_document_created, event_document_edited, event_document_viewed,
-    event_trashed_document_deleted, event_trashed_document_restored
+    event_trashed_document_deleted, event_trashed_document_restored, event_reviewer_changed
 )
 
 # Document files
@@ -82,7 +82,7 @@ from .links.document_links import (
     link_document_type_change, link_document_properties_edit,
     link_document_list, link_document_recently_accessed_list,
     link_document_recently_created_list, link_document_multiple_type_change,
-    link_document_preview, link_document_properties
+    link_document_preview, link_document_properties, link_reviewer_change
 )
 from .links.document_file_links import (
     link_document_file_delete, link_document_file_delete_multiple,
@@ -325,7 +325,7 @@ class DocumentsApp(MayanAppConfig):
             model=Document, event_types=(
                 event_document_edited, event_document_type_changed,
                 event_document_file_deleted, event_document_version_deleted,
-                event_document_viewed, event_trashed_document_restored
+                event_document_viewed, event_trashed_document_restored, event_reviewer_changed,
             )
         )
         ModelEventType.register(
@@ -730,7 +730,7 @@ class DocumentsApp(MayanAppConfig):
             links=(
                 link_document_favorites_add, link_document_favorites_remove,
                 link_document_properties_edit, link_document_type_change,
-                link_document_trash
+                link_document_trash, link_reviewer_change
             ), sources=(Document,)
         )
 

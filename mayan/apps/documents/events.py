@@ -59,6 +59,11 @@ event_document_type_changed = namespace.add_event_type(
     label=_('Document type changed'), name='document_type_change'
 )
 
+# The reviewer of an existing document is changed to another type
+event_reviewer_changed = namespace.add_event_type(
+    label=_('Document reviewer changed'), name='reviewer_change'
+)
+
 # Document version
 
 event_document_version_created = namespace.add_event_type(

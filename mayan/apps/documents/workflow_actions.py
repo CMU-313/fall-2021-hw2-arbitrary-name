@@ -38,3 +38,31 @@ class TrashDocumentAction(WorkflowAction):
 
     def execute(self, context):
         context['document'].delete()
+
+class DocumentReviewerChangeAction(WorkflowAction):
+    fields = {
+        'reviewer': {
+            'label': _('Reviewer'),
+            'class': 'django.forms.ModelChoiceField', 'kwargs': {
+                'help_text': _('New reviewer for the workflow document.'),
+                'queryset': DocumentType.objects.all(), 'required': True
+            }
+        }
+    }
+    label = _('Change reviewer')
+    widgets = {
+        'workflows': {
+            'class': 'django.forms.widgets.Select', 'kwargs': {
+                'attrs': {'class': 'select2'},
+            }
+        }
+    }
+
+    def execute(self, context):
+        context['document'].reviewer_change(
+            reviewer=self.get_document_type()
+        )
+
+    def get_document_reviewer(self):
+        # Needs to be replaced and a reviewer object model needs to be created.
+        return DocumentType.objects.get(pk=self.form_data.get('document_type'))
